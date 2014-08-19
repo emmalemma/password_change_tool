@@ -57,14 +57,12 @@ class Routes(object):
             if log_file:
                 GlobalState.log_file = log_file
                 GlobalState.log_file_path = GlobalState.default_log_file_path
-        print "logged"
         if not GlobalState.log_file:
             # if no default, ask user to pick
             controller.show_panel(views.CreateLogPanel)
         else:
             # all set, move on to picking passwords
             controller.show_panel(views.ChoosePasswordsPanel)
-        print "panels"
 
     def log_file_selected(self):
         controller.show_panel(views.ChoosePasswordsPanel)
