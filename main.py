@@ -51,7 +51,6 @@ class Routes(object):
         self.password_manager.get_password_data()
 
     def got_password_entries(self):
-        print "got entries"
         # see if we already have a default log file provided by the password manager module
         if GlobalState.default_log_file_path:
             log_file = load_log_file(GlobalState.default_log_file_path)
@@ -60,11 +59,9 @@ class Routes(object):
                 GlobalState.log_file_path = GlobalState.default_log_file_path
         print "logged"
         if not GlobalState.log_file:
-            print "prompt"
             # if no default, ask user to pick
             controller.show_panel(views.CreateLogPanel)
         else:
-            print "choose"
             # all set, move on to picking passwords
             controller.show_panel(views.ChoosePasswordsPanel)
         print "panels"
