@@ -61,7 +61,6 @@ class CreateLogPanel(SizerPanel):
 
 class ChoosePasswordsPanel(SizerPanel):
     def add_controls(self):
-        print 'adding controls'
         self.add_text("""
             Select the passwords you would like to update.
 
@@ -74,17 +73,12 @@ class ChoosePasswordsPanel(SizerPanel):
         continue_button.Disable()
         self.Bind(wx.EVT_BUTTON, self.change_passwords, continue_button)
 
-        print 'check list'
 
         class CheckListCtrl(wx.ListCtrl, CheckListCtrlMixin):
             def __init__(self, parent):
-                print ' wx'
                 wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT)
-                print ' clist'
                 CheckListCtrlMixin.__init__(self)
-                print ' bind'
                 self.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.OnItemActivated)
-                print ' done'
 
             def OnItemActivated(self, evt):
                 self.ToggleItem(evt.m_itemIndex)
@@ -102,8 +96,6 @@ class ChoosePasswordsPanel(SizerPanel):
         list = CheckListCtrl(self)
         self.sizer.Add(list, 1, wx.EXPAND)
 
-        print ' cols'
-
         for i, title in enumerate(("Login", "Domain", "User", "Reason unavailable")):
             list.InsertColumn(i, title)
 
@@ -116,8 +108,6 @@ class ChoosePasswordsPanel(SizerPanel):
             return prefix + login['label'].lower()
 
         logins.sort(key=login_sort_key)
-
-        print 'logins'
 
         # add logins to list
         for login_index, login in enumerate(logins):
@@ -137,13 +127,10 @@ class ChoosePasswordsPanel(SizerPanel):
         for i in range(4):
             list.SetColumnWidth(i, wx.LIST_AUTOSIZE)
 
-        print 'binding'
-
         self.Bind(wx.EVT_LIST_ITEM_SELECTED, self.item_selected, list)
         self.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.item_deselected, list)
 
         self.sizer.Add(continue_button, 0, wx.TOP, border=30)
-        print 'added controls'
 
     def item_selected(self, evt):
         print 'item selected: %s\n' % evt.m_itemIndex
